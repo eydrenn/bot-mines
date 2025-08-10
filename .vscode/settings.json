@@ -1,0 +1,23 @@
+{
+	// Formatting & Linting
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "biomejs.biome",
+
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": "always",
+		"source.fixAll.eslint": "always",
+		"source.addMissingImports": "always",
+		"source.organizeImports": "always"
+	},
+
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	}
+}

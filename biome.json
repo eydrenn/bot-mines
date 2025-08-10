@@ -1,0 +1,35 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"files": {
+		"ignore": ["node_modules", "build", "homolog"]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"performance": { "noDelete": "off" },
+			"recommended": true,
+			"style": {
+				"noParameterAssign": "off",
+				"useNodejsImportProtocol": "off",
+				"useTemplate": "off",
+				"noUselessElse": "off"
+			},
+			"complexity": {
+				"noStaticOnlyClass": "off",
+				"noForEach": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noMisleadingCharacterClass": "off",
+				"noControlCharactersInRegex": "off"
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": true
+	}
+}
