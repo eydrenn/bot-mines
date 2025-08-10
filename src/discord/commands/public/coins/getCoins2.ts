@@ -16,12 +16,12 @@ createCommand({
 			const coins = (await db.get(`coins.${message.author.id}`)) || 0;
 
 			await interaction.reply({
-				ephemeral: true,
+				flags: ["Ephemeral"],
 				content: `O autor da mensagem ${message.author} tem ${coins} coins.`,
 			});
 		} catch {
 			await interaction.reply({
-				ephemeral: true,
+				flags: ["Ephemeral"],
 				content: "Não foi possível obter as coins.",
 			});
 		}
