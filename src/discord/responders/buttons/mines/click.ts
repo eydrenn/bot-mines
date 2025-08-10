@@ -48,7 +48,7 @@ createResponder({
 			await db.add(`coins.${game.winner}`, game.bet * 2);
 
 			const components = buildBoard(gameId, game, true, true);
-			const content = `Jogo de Minas\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\n<@${game.currentTurn}> acertou uma mina! <@${game.winner}> venceu e ganhou ${game.bet * 2} moedas!`;
+			const content = `Jogo de Mines\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\n<@${game.currentTurn}> acertou uma mina! <@${game.winner}> venceu e ganhou ${game.bet * 2} moedas!`;
 
 			await db.delete(`games.${gameId}`);
 			await interaction.update({ content, components });
@@ -74,7 +74,7 @@ createResponder({
 				await db.add(`coins.${game.player2}`, game.bet);
 
 				const components = buildBoard(gameId, game, true, true);
-				const content = `Jogo de Minas\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\nTodas as células seguras foram reveladas! Empate! Moedas devolvidas.`;
+				const content = `Jogo de Mines\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\nTodas as células seguras foram reveladas! Empate! Moedas devolvidas.`;
 				await interaction.update({ content, components });
 
 				await db.delete(`games.${gameId}`);
@@ -87,7 +87,7 @@ createResponder({
 			await db.set(`games.${gameId}`, game);
 
 			const components = buildBoard(gameId, game);
-			const content = `Jogo de Minas\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\nVez: <@${game.currentTurn}>`;
+			const content = `Jogo de Mines\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\nVez: <@${game.currentTurn}>`;
 
 			await interaction.update({ content, components });
 		}

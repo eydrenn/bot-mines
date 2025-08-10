@@ -10,7 +10,7 @@ import { QuickDB } from "quick.db";
 
 createCommand({
 	name: "mines",
-	description: "Jogo de Minas multiplayer.",
+	description: "Jogo de Mines multiplayer.",
 	type: ApplicationCommandType.ChatInput,
 	options: [
 		{
@@ -65,7 +65,7 @@ createCommand({
 		const row = createRow(acceptButton, denyButton);
 
 		await interaction.reply({
-			content: `${challenged}, você foi desafiado para um jogo de Minas por ${interaction.user} com aposta de ${bet} moedas.`,
+			content: `${challenged}, você foi desafiado para um jogo de Mines por ${interaction.user} com aposta de ${bet} moedas.`,
 			components: [row],
 			withResponse: true,
 		});
@@ -75,13 +75,9 @@ createCommand({
 				const message = await interaction.fetchReply();
 				if (message.components.length >= 5) return;
 
-				const disabledAccept = acceptButton.setDisabled(true);
-				const disabledDeny = denyButton.setDisabled(true);
-				const disabledRow = createRow(disabledAccept, disabledDeny);
-
 				await message.edit({
 					content: `⏰ O desafio para ${challenged} expirou.\n-# 1 minuto sem resposta.`,
-					components: [disabledRow],
+					components: [],
 				});
 			} catch (error) {
 				console.error("Erro ao editar mensagem de timeout do desafio:", error);
