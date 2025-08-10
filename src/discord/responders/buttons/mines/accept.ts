@@ -14,7 +14,7 @@ createResponder({
 	types: [ResponderType.Button],
 	parse: confirmSchema.parse,
 	cache: "cached",
-  
+
 	async run(interaction, { challenger, challenged, bet }) {
 		if (interaction.user.id !== challenged) {
 			await interaction.reply({
@@ -98,7 +98,7 @@ createResponder({
 		};
 		await db.set(`games.${gameId}`, game);
 
-		const components = buildBoard(gameId, game);
+		const components = buildBoard(game);
 		const content = `Jogo de Mines iniciado!\nJogadores: <@${player1}> vs <@${player2}>\nAposta: ${bet} moedas cada\nVez: <@${currentTurn}>`;
 
 		await interaction.update({ content, components });

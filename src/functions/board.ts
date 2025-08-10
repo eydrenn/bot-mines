@@ -1,12 +1,7 @@
 import { createRow } from "@magicyan/discord";
 import { ButtonBuilder, ButtonStyle } from "discord.js";
 
-export function buildBoard(
-	gameId: string,
-	game: any,
-	disableAll = false,
-	revealMines = false,
-) {
+export function buildBoard(game: any, disableAll = false, revealMines = false) {
 	const rows = [];
 	const numberEmojis = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"];
 
@@ -14,9 +9,7 @@ export function buildBoard(
 		const btns = [];
 
 		for (let c = 0; c < 5; c++) {
-			const btn = new ButtonBuilder().setCustomId(
-				`mines_click/${gameId}/${r}/${c}`,
-			);
+			const btn = new ButtonBuilder().setCustomId(`mines_click/${r}/${c}`);
 			if (revealMines && game.isMine[r][c]) {
 				btn.setEmoji("💥").setStyle(ButtonStyle.Danger).setDisabled(true);
 			} else if (game.revealed[r][c]) {
@@ -29,7 +22,6 @@ export function buildBoard(
 						.setStyle(ButtonStyle.Primary)
 						.setDisabled(true);
 				}
-				
 			} else {
 				btn
 					.setEmoji("⬛")

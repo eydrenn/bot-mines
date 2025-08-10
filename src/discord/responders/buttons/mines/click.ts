@@ -4,40 +4,39 @@ import { QuickDB } from "quick.db";
 import { z } from "zod";
 
 const clickSchema = z.object({
-	gameId: z.string(),
 	row: z.coerce.number(),
 	col: z.coerce.number(),
 });
 
 createResponder({
-	customId: "mines_click/:gameId/:row/:col",
+	customId: "mines_click/:row/:col",
 	types: [ResponderType.Button],
 	parse: clickSchema.parse,
 	cache: "cached",
-	
-	async run(interaction, { gameId, row, col }) {
+
+	async run(interaction, { row, col }) {
+		await interaction.deferUpdate({ withResponse: true });
+
 		const db = new QuickDB();
 
+		const gameId = interaction.message.id;
 		const game = await db.get(`games.${gameId}`);
 		if (!game || game.over) {
-			await interaction.reply({
-				flags: ["Ephemeral"],
+			await interaction.update({
 				content: "Jogo não encontrado ou finalizado.",
 			});
 			return;
 		}
 
 		if (interaction.user.id !== game.currentTurn) {
-			await interaction.reply({
-				flags: ["Ephemeral"],
+			await interaction.update({
 				content: "Não é sua vez.",
 			});
 			return;
 		}
 
 		if (game.revealed[row][col]) {
-			await interaction.reply({
-				flags: ["Ephemeral"],
+			await interaction.update({
 				content: "Célula já revelada.",
 			});
 			return;
@@ -51,10 +50,11 @@ createResponder({
 
 			await db.add(`coins.${game.winner}`, game.bet * 2);
 
-			const components = buildBoard(gameId, game, true, true);
+			const components = buildBoard(game, true, true);
 			const content = `Jogo de Mines\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\n<@${game.currentTurn}> acertou uma mina! <@${game.winner}> venceu e ganhou ${game.bet * 2} moedas!`;
 
 			await db.delete(`games.${gameId}`);
+
 			await interaction.update({ content, components });
 
 			return;
@@ -77,11 +77,12 @@ createResponder({
 				await db.add(`coins.${game.player1}`, game.bet);
 				await db.add(`coins.${game.player2}`, game.bet);
 
-				const components = buildBoard(gameId, game, true, true);
+				const components = buildBoard(game, true, true);
 				const content = `Jogo de Mines\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\nTodas as células seguras foram reveladas! Empate! Moedas devolvidas.`;
-				await interaction.update({ content, components });
 
 				await db.delete(`games.${gameId}`);
+
+				await interaction.update({ content, components });
 
 				return;
 			}
@@ -90,7 +91,7 @@ createResponder({
 				game.currentTurn === game.player1 ? game.player2 : game.player1;
 			await db.set(`games.${gameId}`, game);
 
-			const components = buildBoard(gameId, game);
+			const components = buildBoard(game);
 			const content = `Jogo de Mines\nJogadores: <@${game.player1}> vs <@${game.player2}>\nAposta: ${game.bet} moedas cada\nVez: <@${game.currentTurn}>`;
 
 			await interaction.update({ content, components });
