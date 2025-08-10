@@ -15,28 +15,26 @@ createResponder({
 	cache: "cached",
 
 	async run(interaction, { row, col }) {
-		await interaction.deferUpdate({ withResponse: true });
-
 		const db = new QuickDB();
 
 		const gameId = interaction.message.id;
 		const game = await db.get(`games.${gameId}`);
 		if (!game || game.over) {
-			await interaction.update({
+			await interaction.reply({
 				content: "Jogo não encontrado ou finalizado.",
 			});
 			return;
 		}
 
 		if (interaction.user.id !== game.currentTurn) {
-			await interaction.update({
+			await interaction.reply({
 				content: "Não é sua vez.",
 			});
 			return;
 		}
 
 		if (game.revealed[row][col]) {
-			await interaction.update({
+			await interaction.reply({
 				content: "Célula já revelada.",
 			});
 			return;
