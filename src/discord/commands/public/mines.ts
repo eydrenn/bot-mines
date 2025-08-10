@@ -10,7 +10,7 @@ import { QuickDB } from "quick.db";
 
 createCommand({
 	name: "mines",
-	description: "Jogo de Mines multiplayer.",
+	description: "Jogo de mines multiplayer.",
 	type: ApplicationCommandType.ChatInput,
 	options: [
 		{

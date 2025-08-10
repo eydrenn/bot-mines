@@ -6,6 +6,7 @@ createResponder({
 	types: [ResponderType.Button],
 	parse: confirmSchema.parse,
 	cache: "cached",
+  
 	async run(interaction, { challenged }) {
 		if (
 			interaction.user.id !== challenged &&

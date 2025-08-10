@@ -9,8 +9,10 @@ export function buildBoard(
 ) {
 	const rows = [];
 	const numberEmojis = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"];
+
 	for (let r = 0; r < 5; r++) {
 		const btns = [];
+
 		for (let c = 0; c < 5; c++) {
 			const btn = new ButtonBuilder().setCustomId(
 				`mines_click/${gameId}/${r}/${c}`,
@@ -27,6 +29,7 @@ export function buildBoard(
 						.setStyle(ButtonStyle.Primary)
 						.setDisabled(true);
 				}
+				
 			} else {
 				btn
 					.setEmoji("⬛")
@@ -35,8 +38,10 @@ export function buildBoard(
 			}
 			btns.push(btn);
 		}
+
 		rows.push(createRow(...btns));
 	}
+
 	return rows;
 }
 

@@ -1,9 +1,9 @@
-import { createEvent, logger } from "#base";
+import { createEvent } from "#base";
 
 createEvent({
-    name: "Error handler",
-    event: "error",
-    async run(error) {
-        logger.error(error);
-    },
+	name: "Error handler",
+	event: "error",
+	async run() {
+		// logger.error(err);
+	},
 });

@@ -1,5 +1,5 @@
 import { ResponderType, createResponder } from "#base";
-import { buildBoard } from "functions/mines/board.js";
+import { buildBoard } from "#functions";
 import { QuickDB } from "quick.db";
 import z from "zod";
 
@@ -14,6 +14,7 @@ createResponder({
 	types: [ResponderType.Button],
 	parse: confirmSchema.parse,
 	cache: "cached",
+  
 	async run(interaction, { challenger, challenged, bet }) {
 		if (interaction.user.id !== challenged) {
 			await interaction.reply({

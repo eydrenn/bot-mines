@@ -1,5 +1,5 @@
 import { ResponderType, createResponder } from "#base";
-import { buildBoard, floodReveal } from "functions/mines/board.js";
+import { buildBoard, floodReveal } from "#functions";
 import { QuickDB } from "quick.db";
 import { z } from "zod";
 
@@ -14,6 +14,7 @@ createResponder({
 	types: [ResponderType.Button],
 	parse: clickSchema.parse,
 	cache: "cached",
+	
 	async run(interaction, { gameId, row, col }) {
 		const db = new QuickDB();
 
@@ -25,6 +26,7 @@ createResponder({
 			});
 			return;
 		}
+
 		if (interaction.user.id !== game.currentTurn) {
 			await interaction.reply({
 				flags: ["Ephemeral"],
@@ -32,6 +34,7 @@ createResponder({
 			});
 			return;
 		}
+
 		if (game.revealed[row][col]) {
 			await interaction.reply({
 				flags: ["Ephemeral"],
@@ -39,6 +42,7 @@ createResponder({
 			});
 			return;
 		}
+
 		if (game.isMine[row][col]) {
 			game.revealed[row][col] = true;
 			game.over = true;

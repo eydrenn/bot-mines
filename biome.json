@@ -15,16 +15,25 @@
 				"noParameterAssign": "off",
 				"useNodejsImportProtocol": "off",
 				"useTemplate": "off",
-				"noUselessElse": "off"
+				"noUselessElse": "off",
+				"noUnusedTemplateLiteral": "off",
+				"useImportType": "off",
+				"noNonNullAssertion": "off"
 			},
 			"complexity": {
 				"noStaticOnlyClass": "off",
-				"noForEach": "off"
+				"noForEach": "off",
+				"noBannedTypes": "off",
+				"useArrowFunction": "off"
 			},
 			"suspicious": {
 				"noExplicitAny": "off",
+				"noImplicitAnyLet": "off",
+				"noAssignInExpressions": "off",
 				"noMisleadingCharacterClass": "off",
-				"noControlCharactersInRegex": "off"
+				"noControlCharactersInRegex": "off",
+				"noDoubleEquals": "off",
+				"noConfusingVoidType": "off"
 			}
 		}
 	},
