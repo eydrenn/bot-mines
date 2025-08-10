@@ -79,13 +79,23 @@ createResponder({
 			}
 		}
 
-		const revealed = Array.from({ length: size }, () =>
+		const revealed: boolean[][] = Array.from({ length: size }, () =>
 			Array(size).fill(false),
 		);
 		const player1 = challenger;
 		const player2 = challenged;
 		const currentTurn = player1;
-		const game = {
+		const game: {
+			player1: string;
+			player2: string;
+			currentTurn: string;
+			bet: number;
+			isMine: boolean[][];
+			numbers: number[][];
+			revealed: boolean[][];
+			over: boolean;
+			winner: null;
+		} = {
 			player1,
 			player2,
 			currentTurn,
